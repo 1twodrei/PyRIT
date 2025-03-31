@@ -21,8 +21,8 @@ steps:
     name: InstallKeyring
 
   - script: |
-    echo "[global]" > pip.conf
-    echo "index-url=https://pkgs.dev.azure.com/atml/d6628cad-394f-463f-84a4-c3a00a85a6ed/_packaging/PyRIT_PublicPackages/pypi/simple/" >> pip.conf
+      echo "[global]" > pip.conf
+      echo "index-url=https://pkgs.dev.azure.com/atml/d6628cad-394f-463f-84a4-c3a00a85a6ed/_packaging/PyRIT_PublicPackages/pypi/simple/" >> pip.conf
     name: CreatePipConf
 
   - script: pip install toml-to-requirements
