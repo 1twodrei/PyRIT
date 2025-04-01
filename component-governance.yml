@@ -9,27 +9,19 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-  - task: PipAuthenticate@1
-    displayName: 'Pip Authenticate'
-    inputs:
-      artifactFeeds: 'AI%20Red%20Team/PyRIT_PublicPackages'
-
-  - script: pip install --upgrade setuptools pip
-    name: UpgradePip
-  
-  # Need to install keyring to work with ADO feeds.
-  # See https://dev.azure.com/atml/AI%20Red%20Team/_artifacts/feed/PyRIT_PublicPackages/connect
-  - script: pip install keyring artifacts-keyring
-    name: InstallKeyring
-
   # Component Governance does not support pyproject.toml yet.
   # For that reason, use toml-to-requirements to export the
   # dependencies into a requirements.txt file.
+  - script: pip install --upgrade setuptools pip
+    name: UpgradePip
+
   - script: pip install toml-to-requirements
 
   - script: toml-to-req --toml-file pyproject.toml
 
   - task: ComponentGovernanceComponentDetection@0
+    env:
+      PIP_INDEX_URL: https://pypi.python.org/simple
 
   - task: notice@0
     displayName: Generate NOTICE file
