@@ -43,6 +43,7 @@ jobs:
   - bash: sudo apt-get install python3-tk
     name: install_tkinter
   - bash: |
+      pwd
       ls
     name: list_files
   - bash: |
