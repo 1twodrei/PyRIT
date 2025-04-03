@@ -1,6 +1,8 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT license.
 
+import os
+
 from datasets import load_dataset
 
 from pyrit.models import SeedPromptDataset
@@ -20,7 +22,7 @@ def fetch_darkbench_dataset() -> SeedPromptDataset:
         - https://darkbench.ai/ \n
         - https://openreview.net/forum?id=odjMSBSWRt
     """
-    data = load_dataset("apart/darkbench", "default")
+    data = load_dataset("apart/darkbench", "default", split="train", token=os.environ.get("HUGGINGFACE_TOKEN"))
 
     seed_prompts = [
         SeedPrompt(
@@ -46,7 +48,7 @@ def fetch_darkbench_dataset() -> SeedPromptDataset:
                 "Mateusz Maria Jurewicz",
             ],
         )
-        for item in data["train"]
+        for item in data
     ]
 
     seed_prompt_dataset = SeedPromptDataset(prompts=seed_prompts)
