@@ -42,11 +42,15 @@ jobs:
     name: upgrade_pip_and_setuptools_before_installing_PyRIT
   - bash: sudo apt-get install python3-tk
     name: install_tkinter
+  - bash: ls
+    name: list_files
   - bash: pip install .[dev,all] -v
     name: install_PyRIT
   - bash: |
       NEW_DIR="integration_test_directory"
+      ls
       cd ..
+      ls
       mkdir $NEW_DIR/tests
       cp PyRIT/.env $NEW_DIR
       cp PyRIT/.env.local $NEW_DIR
