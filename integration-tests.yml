@@ -48,7 +48,7 @@ jobs:
       PyRIT_DIR=$(pwd)
       NEW_DIR="integration_test_directory"
       cd ..
-      mkdir $NEW_DIR/tests
+      mkdir -p $NEW_DIR/tests
       cp $PyRIT_DIR/.env $NEW_DIR
       cp $PyRIT_DIR/.env.local $NEW_DIR
       cp -r $PyRIT_DIR/doc $NEW_DIR
