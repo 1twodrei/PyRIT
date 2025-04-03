@@ -44,9 +44,11 @@ jobs:
     name: install_tkinter
   - bash: |
       ls
+    name: list_files
+  - bash: |
       cd ..
       ls
-    name: list_files
+    name: list_parent_directory
   - bash: pip install .[dev,all] -v
     name: install_PyRIT
   - bash: |
