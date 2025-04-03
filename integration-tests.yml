@@ -42,27 +42,18 @@ jobs:
     name: upgrade_pip_and_setuptools_before_installing_PyRIT
   - bash: sudo apt-get install python3-tk
     name: install_tkinter
-  - bash: |
-      pwd
-      ls
-    name: list_files
-  - bash: |
-      cd ..
-      ls
-    name: list_parent_directory
   - bash: pip install .[dev,all] -v
     name: install_PyRIT
   - bash: |
+      PyRIT_DIR=$(pwd)
       NEW_DIR="integration_test_directory"
-      ls
       cd ..
-      ls
       mkdir $NEW_DIR/tests
-      cp PyRIT/.env $NEW_DIR
-      cp PyRIT/.env.local $NEW_DIR
-      cp -r PyRIT/doc $NEW_DIR
-      cp -r PyRIT/assets $NEW_DIR
-      cp -r PyRIT/tests/integration $NEW_DIR/tests
+      cp $PyRIT_DIR/.env $NEW_DIR
+      cp $PyRIT_DIR/.env.local $NEW_DIR
+      cp -r $PyRIT_DIR/doc $NEW_DIR
+      cp -r $PyRIT_DIR/assets $NEW_DIR
+      cp -r $PyRIT_DIR/tests/integration $NEW_DIR/tests
       cd $NEW_DIR
     displayName: "create and switch to new integration test directory"
   - bash: make integration-test
