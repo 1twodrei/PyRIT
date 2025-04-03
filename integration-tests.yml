@@ -44,6 +44,17 @@ jobs:
     name: install_tkinter
   - bash: pip install .[dev,all] -v
     name: install_PyRIT
+  - bash: |
+      NEW_DIR="integration_test_directory"
+      cd ..
+      mkdir $NEW_DIR/tests
+      cp PyRIT/.env $NEW_DIR
+      cp PyRIT/.env.local $NEW_DIR
+      cp -r PyRIT/doc $NEW_DIR
+      cp -r PyRIT/assets $NEW_DIR
+      cp -r PyRIT/tests/integration $NEW_DIR/tests
+      cd $NEW_DIR
+    name: create and switch to new integration test directory
   - bash: make integration-test
     name: run_integration_tests
   - bash: rm -f .env
