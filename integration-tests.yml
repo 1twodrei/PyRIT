@@ -42,7 +42,10 @@ jobs:
     name: upgrade_pip_and_setuptools_before_installing_PyRIT
   - bash: sudo apt-get install python3-tk
     name: install_tkinter
-  - bash: ls
+  - bash: |
+      ls
+      cd ..
+      ls
     name: list_files
   - bash: pip install .[dev,all] -v
     name: install_PyRIT
